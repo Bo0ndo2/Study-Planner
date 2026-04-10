@@ -27,7 +27,7 @@ export type StudySession = {
   breakAfterMinutes: 5 | 15 | null;
   priority: number;
   deadline: string;
-  status: "planned" | "moved";
+  status: "planned" | "moved" | "completed";
 };
 
 export type SessionOverride = {

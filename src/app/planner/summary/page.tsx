@@ -11,7 +11,6 @@ export default function SummaryPage() {
   const {
     data,
     plan,
-    lastMove,
     isLoading,
     isFetching,
     isSaving,

@@ -40,6 +40,16 @@ export function getDefaultPlannerData() {
   };
 }
 
+type StoredSubtask = {
+  id?: unknown;
+  title?: unknown;
+  done?: unknown;
+};
+
+function isStoredSubtask(subtask: unknown): subtask is StoredSubtask {
+  return Boolean(subtask) && typeof subtask === "object";
+}
+
 function normalizeSubject(subject: unknown) {
   if (!subject || typeof subject !== "object") {
     return null;
@@ -51,7 +61,7 @@ function normalizeSubject(subject: unknown) {
     ...value,
     subtasks: Array.isArray(value.subtasks)
       ? value.subtasks
-          .filter((subtask): subtask is Record<string, unknown> => Boolean(subtask) && typeof subtask === "object")
+          .filter(isStoredSubtask)
           .map((subtask) => ({
             id: typeof subtask.id === "string" ? subtask.id : crypto.randomUUID(),
             title: typeof subtask.title === "string" ? subtask.title : "Untitled subtask",
